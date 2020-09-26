@@ -33,5 +33,7 @@ namespace TransactionManagement.MVC.Models
         public DbSet<TransactionManagement.MVC.Models.Product> Products { get; set; }
         public DbSet<TransactionManagement.MVC.Models.Customer> Customers { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+
     }
 }

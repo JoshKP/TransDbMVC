@@ -7,7 +7,7 @@ namespace TransactionManagement.MVC.Models
 {
     public class Transaction
     {
-        public int Id { get; set; }
+        public int TransactionId { get; set; }
 
         public int CustomerId { get; set; }
         public int ProductId { get; set; }

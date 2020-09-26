@@ -78,6 +78,7 @@ namespace TransactionManagement.MVC.Controllers
             if (ModelState.IsValid)
             {
                 _db.Entry(transaction).State = EntityState.Modified;
+                TempData["SaveResult"] = "Your transaction was updated";
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -111,6 +112,8 @@ namespace TransactionManagement.MVC.Controllers
             Product product = _db.Products.Find(transaction.ProductId);
             product.InventoryCount += transaction.Quantity;
             _db.Transactions.Remove(transaction);
+            TempData["SaveResult"] = "Your transaction was deleted";
+
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
