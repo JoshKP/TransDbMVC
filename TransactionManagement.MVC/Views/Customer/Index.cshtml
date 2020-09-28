@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TransactionManagement.MVC.Models.Customer>
+﻿@model IEnumerable<TransactionManagement.MVC.Models.CustomerModels.CustomerListItem>
 
 @{
     ViewBag.Title = "Index";
@@ -24,16 +24,22 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Company)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserSince)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountAge)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PhoneNumber)
@@ -51,16 +57,22 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.Company)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserSince)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountAge)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
@@ -72,9 +84,9 @@
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.CustomerID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
     }

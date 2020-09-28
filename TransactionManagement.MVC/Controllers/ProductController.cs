@@ -14,8 +14,7 @@ namespace TransactionManagement.MVC.Controllers
     [Authorize]
     public class ProductController : Controller
     {
-        // Add the application DB Context (link to database)
-        private ApplicationDbContext _db = new ApplicationDbContext();
+        
         public ActionResult Index()
         {
             // var userId = Guid.Parse(User.Identity.GetUserId());

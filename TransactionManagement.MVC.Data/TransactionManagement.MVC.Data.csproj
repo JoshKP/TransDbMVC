@@ -76,6 +76,10 @@
     <Compile Include="Migrations\202009282228578_product crud + starred.Designer.cs">
       <DependentUpon>202009282228578_product crud + starred.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009282312524_spelling fix.cs" />
+    <Compile Include="Migrations\202009282312524_spelling fix.Designer.cs">
+      <DependentUpon>202009282312524_spelling fix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009282228578_product crud + starred.resx">
       <DependentUpon>202009282228578_product crud + starred.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009282312524_spelling fix.resx">
+      <DependentUpon>202009282312524_spelling fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

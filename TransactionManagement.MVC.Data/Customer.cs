@@ -9,9 +9,11 @@ namespace TransactionManagement.MVC.Data
     public class Customer
     {
         [Key]
-        public int CustomerID { get; set; }
+        public int CustomerId { get; set; }
 
         public string Title { get; set; }
+
+        public string Company { get; set; }
 
         [Required]
         public string FirstName { get; set; }

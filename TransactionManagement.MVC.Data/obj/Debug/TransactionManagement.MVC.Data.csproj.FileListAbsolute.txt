@@ -25,3 +25,4 @@ C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.D
 C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Debug\TransactionManagement.MVC.Data.Migrations.InitialCreate.resources
 C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Debug\TransactionManagement.MVC.Data.csproj.GenerateResource.cache
 C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Debug\TransactionManagement.MVC.Data.Migrations.productcrudstarred.resources
+C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Debug\TransactionManagement.MVC.Data.Migrations.spellingfix.resources

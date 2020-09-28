@@ -5,121 +5,68 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TransactionManagement.MVC.Data;
+using TransactionManagement.MVC.Models.CustomerModels;
 
 namespace TransactionManagement.MVC.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomerService
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
-        // GET: Customer
-        public ActionResult Index()
+        //private readonly Guid _userId;
+
+        //public CustomerService(Guid userId)
+        //{
+        //    _userId = userId;
+        //}
+
+        public bool CreateCustomer(CustomerCreate model)
         {
-            List<Customer> customerList = _db.Customers.ToList();
-            List<Customer> orderedList = customerList.OrderBy(c => c.LastName).ToList();
-            return View(orderedList);
+            var entity =
+                new Customer()
+                {
+                    // OwnerId = _userId,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Title = model.Title,
+                    Company = model.Company,
+                    UserSince = model.UserSince,
+                    PhoneNumber = model.PhoneNumber,
+                    Address = model.Address,
+                    Notes = model.Notes
+                };
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Customers.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
         }
 
-        // GET: Customer
-        public ActionResult Create()
+        public IEnumerable<CustomerListItem> GetCustomers()
         {
-            return View();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Customers
+                        // .Where(e => e.OwnerId == _userId)
+                        .Select(
+                            e =>
+                                new CustomerListItem
+                                {
+                                    CustomerId = e.CustomerId,
+                                    Title = e.Title,
+                                    Company = e.Company,
+                                    FirstName = e.FirstName,
+                                    LastName = e.LastName,
+                                    UserSince = e.UserSince,
+                                    PhoneNumber = e.PhoneNumber,
+                                    Address = e.Address,
+                                    Notes = e.Notes
+                                }
+                        );
+
+                return query.ToArray();
+            }
         }
-
-        // POST: Customer
-        [HttpPost]
-        public ActionResult Create(Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Customers.Add(customer);
-                _db.SaveChanges();
-                TempData["SaveResult"] = "Your customer was created.";
-                return RedirectToAction("Index");
-            }
-
-            return View(customer);
-        }
-
-        // GET: Edit
-        // Customer/Edit/{id}
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Customer customer = _db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(customer);
-        }
-
-        // POST: Edit
-        // Customer/Edit/{id}
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit (Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Entry(customer).State = EntityState.Modified;
-                _db.SaveChanges();
-                TempData["SaveResult"] = "Your customer was updated.";
-                return RedirectToAction("Index");
-            }
-
-            return View(customer);
-        }
-
-        // GET: Delete
-        // Customer/Delete/{id}
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Customer customer = _db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(customer);
-        }
-
-        // POST: Delete
-        // Customer/Delete/{id}
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
-        {
-            Customer customer = _db.Customers.Find(id);
-            _db.Customers.Remove(customer);
-            _db.SaveChanges();
-            TempData["SaveResult"] = "Your customer was deleted";
-            return RedirectToAction("Index");
-        }
-
-        // GET: Details
-        // Customer/Details/{id}
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Customer customer = _db.Customers.Find(id);
-
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(customer);
-        }
-    }
+}
 }

@@ -14,7 +14,7 @@ namespace TransactionManagement.MVC.Services
 {
     public class ProductService
     {
-        private readonly Guid _userId;
+        //private readonly Guid _userId;
 
         //public ProductService(Guid userId)
         //{

@@ -19,6 +19,8 @@ namespace TransactionManagement.MVC.Models.CustomerModels
 
         public string Title { get; set; }
 
+        public string Company { get; set; }
+
 
         [Required]
         [Display(Name = "User Since")]
