@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using TransactionManagement.MVC.Data;
 using TransactionManagement.MVC.Models;
 
 namespace TransactionManagement.MVC.Controllers

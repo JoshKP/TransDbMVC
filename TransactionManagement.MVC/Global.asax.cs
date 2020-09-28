@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TransactionManagement.MVC.App_Start;
 
 namespace TransactionManagement.MVC
 {
@@ -14,6 +15,7 @@ namespace TransactionManagement.MVC
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            WebApiConfig.Register();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }

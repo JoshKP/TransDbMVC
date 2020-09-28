@@ -10,8 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using TransactionManagement.MVC.Models;
-
+using TransactionManagement.MVC.Data;
 namespace TransactionManagement.MVC
 {
     public class EmailService : IIdentityMessageService

@@ -1,25 +1,28 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
-using TransactionManagement.MVC.Models;
+using TransactionManagement.MVC.Data;
+using TransactionManagement.MVC.Models.ProductModels;
+using TransactionManagement.MVC.Services;
 
 namespace TransactionManagement.MVC.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
+        // Add the application DB Context (link to database)
         private ApplicationDbContext _db = new ApplicationDbContext();
-
-        // GET: Product
         public ActionResult Index()
         {
-            List<Product> productList = _db.Products.ToList();
-            List<Product> orderedList = productList.OrderBy(prod => prod.Name).ToList();
-            return View(orderedList);
+            // var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ProductService();
+            var model = service.GetProducts();
+
+            return View(model);
         }
 
         // GET: Product
@@ -30,98 +33,130 @@ namespace TransactionManagement.MVC.Controllers
 
         // POST: Product
         [HttpPost]
-        public ActionResult Create(Product product)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ProductCreate model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+
+            var service = CreateProductService();
+
+            if (service.CreateProduct(model))
             {
-                _db.Products.Add(product);
-                _db.SaveChanges();
                 TempData["SaveResult"] = "Your product was created.";
                 return RedirectToAction("Index");
-            }
+            };
 
-            return View(product);
+            ModelState.AddModelError("", "Product could not be created.");
+
+            return View(model);
         }
 
         // GET: Edit
         // Product/Edit/{id}
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Product product = _db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(product);
+            var service = CreateProductService();
+            var detail = service.GetProductById(id);
+            var model =
+                new ProductEdit
+                {
+                    ProductId = detail.ProductId,
+                    SupplierId = detail.SupplierId,
+                    Name = detail.Name,
+                    Category = detail.Category,
+                    Price = detail.Price,
+                    InventoryCount = detail.InventoryCount,
+                    Notes = detail.Notes
+                };
+            return View(model);
         }
 
-        // POST: Edit
-        // Product/Edit/{id}
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(int id, ProductEdit model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.ProductId != id)
             {
-                _db.Entry(product).State = EntityState.Modified;
-                _db.SaveChanges();
-                TempData["SaveResult"] = "Your product was updated";
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateProductService();
+
+            if (service.UpdateProduct(model))
+            {
+                TempData["SaveResult"] = "Your product was updated.";
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            ModelState.AddModelError("", "Your product could not be updated.");
+            return View(model);
         }
 
         // GET: Delete
         // Product/Delete/{id}
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Product product = _db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
-
-        // POST: Delete
-        // Product/Delete/{id}
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            Product product = _db.Products.Find(id);
-            _db.Products.Remove(product);
-            _db.SaveChanges();
+            var svc = CreateProductService();
+            var model = svc.GetProductById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = CreateProductService();
+
+            service.DeleteProduct(id);
+
             TempData["SaveResult"] = "Your product was deleted";
+
             return RedirectToAction("Index");
         }
 
         // GET: Details
         // Product/Details/{id}
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Product product = _db.Products.Find(id);
+            var svc = CreateProductService();
+            var model = svc.GetProductById(id);
 
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(product);
+            return View(model);
         }
+
+        private ProductService CreateProductService()
+        {
+            // var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ProductService();
+            return service;
+        }
+
     }
+                //[HttpPut]
+        //[Route("{id}/Star")]
+        //public bool ToggleStar(int id)
+        //{
+        //    var service = CreateProductService();
+
+        //    var detail = service.GetProductById(id);
+
+        //    var updatedProduct =
+        //        new ProductEdit
+        //        {
+        //            ProductId = detail.ProductId,
+        //            Name = detail.Name,
+        //            Price = detail.Price,
+        //            IsStarred = !detail.IsStarred
+        //        };
+
+        //    return service.UpdateProduct(updatedProduct);
+        //}
+
+
+    
 }
