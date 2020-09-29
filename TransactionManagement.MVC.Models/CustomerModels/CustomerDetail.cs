@@ -11,9 +11,11 @@ namespace TransactionManagement.MVC.Models.CustomerModels
     {
 
         [Key]
-        public int CustomerID { get; set; }
+        public int CustomerId { get; set; }
 
         public string Title { get; set; }
+
+        public string Company { get; set; }
 
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

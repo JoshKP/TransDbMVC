@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace TransactionManagement.MVC.Models.CustomerModels
 {
-    class CustomerEdit
+    public class CustomerEdit
     {
+        public int CustomerId { get; set; }
+
+        public string Title { get; set; }
+
+        public string Company { get; set; }
+
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 

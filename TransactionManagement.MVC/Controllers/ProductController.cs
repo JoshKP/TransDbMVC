@@ -24,6 +24,29 @@ namespace TransactionManagement.MVC.Controllers
             return View(model);
         }
 
+        public ProductDetail GetProductById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Products
+                        .Single(e => e.ProductId == id);
+                        // && e.OwnerId == _userId);
+                return
+                    new ProductDetail
+                    {
+                        ProductId = entity.ProductId,
+                        SupplierId = entity.SupplierId,
+                        Name = entity.Name,
+                        Category = entity.Category,
+                        Price = entity.Price,
+                        InventoryCount = entity.InventoryCount,
+                        Notes = entity.Notes
+                    };
+            }
+        }
+
         // GET: Product
         public ActionResult Create()
         {
