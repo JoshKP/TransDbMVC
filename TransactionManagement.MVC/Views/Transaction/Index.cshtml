@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TransactionManagement.MVC.Models.Transaction>
+﻿@model IEnumerable<TransactionManagement.MVC.Models.TransactionModels.TransactionListItem>
 
 @{
     ViewBag.Title = "Index";
@@ -24,6 +24,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.TransactionId)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CustomerId)
         </th>
         <th>
@@ -36,7 +39,7 @@
             @Html.DisplayNameFor(model => model.DatePlaced)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeOfPayment)
+            @Html.DisplayNameFor(model => model.Quantity)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TotalCost)
@@ -51,6 +54,9 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.TransactionId)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.CustomerId)
             </td>
             <td>
@@ -63,7 +69,7 @@
                 @Html.DisplayFor(modelItem => item.DatePlaced)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TypeOfPayment)
+                @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalCost)

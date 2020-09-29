@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransactionManagement.MVC.Models.CustomerModels
+namespace TransactionManagement.MVC.Models.TransactionModels
 {
     public class TransactionCreate
     {
@@ -13,8 +13,10 @@ namespace TransactionManagement.MVC.Models.CustomerModels
         public int CustomerId { get; set; }
 
         [Required]
+        public int SupplierId { get; set; }
+
+        [Required]
         public int ProductId { get; set; }
-        public int TargetedPromoId { get; set; }
 
         [Required]
         public DateTimeOffset DatePlaced { get; set; }

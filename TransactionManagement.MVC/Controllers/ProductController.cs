@@ -119,6 +119,7 @@ namespace TransactionManagement.MVC.Controllers
 
         // GET: Delete
         // Product/Delete/{id}
+        [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
             var svc = CreateProductService();

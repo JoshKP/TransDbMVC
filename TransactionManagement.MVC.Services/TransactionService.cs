@@ -5,136 +5,133 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TransactionManagement.MVC.Data;
+using TransactionManagement.MVC.Models.TransactionModels;
 
 namespace TransactionManagement.MVC.Controllers
 {
-    public class TransactionController : Controller
+    public class TransactionService
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
-        // GET: Transaction
-        public ActionResult Index()
+
+        //public class TransactionService
+        //{
+        //    private readonly Guid _userId;
+
+        //    public TransactionService(Guid userId)
+        //    {
+        //        _userId = userId;
+        //    }
+        //}
+
+        public IEnumerable<TransactionListItem> GetTransactions()
         {
-            List<Transaction> transactionList = _db.Transactions.ToList();
-            List<Transaction> orderedList = transactionList.OrderBy(t => t.DatePlaced).ToList();
-            return View(orderedList);
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Transactions
+                        // .Where(e => e.OwnerId == _userId)
+                        .Select(
+                            e =>
+                                new TransactionListItem
+                                {
+                                    TransactionId = e.TransactionId,
+                                    CustomerId = e.CustomerId,
+                                    SupplierId = e.SupplierId,
+                                    ProductId = e.ProductId,
+                                    Quantity = e.Quantity,
+                                    TotalCost = e.TotalCost,
+                                    Notes = e.Notes
+                                }
+                        );
+
+                return query.ToArray();
+            }
         }
 
-        // GET: Transaction
-        public ActionResult Create()
+        public TransactionDetail GetTransactionById(int id)
         {
-            return View();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Transactions
+                        .Single(e => e.TransactionId == id);
+                // && e.OwnerId == _userId);
+                return
+                    new TransactionDetail
+                    {
+                        TransactionId = entity.TransactionId,
+                        CustomerId = entity.CustomerId,
+                        SupplierId = entity.SupplierId,
+                        ProductId = entity.ProductId,
+                        DatePlaced = entity.DatePlaced,
+                        Quantity = entity.Quantity,
+                        TotalCost = entity.TotalCost,
+                        Notes = entity.Notes
+                    };
+            }
         }
 
-        // POST: Transaction
-        [HttpPost]
-        public ActionResult Create(Transaction transaction)
+        public bool CreateTransaction(TransactionCreate model)
         {
-            if (ModelState.IsValid)
+            var entity =
+                new Transaction()
+                {
+                    CustomerId = model.CustomerId,
+                    SupplierId = model.SupplierId,
+                    ProductId = model.ProductId,
+                    DatePlaced = model.DatePlaced,
+                    Quantity = model.Quantity,
+                    TotalCost = model.TotalCost,
+                    Notes = model.Notes
+                };
+
+            using (var ctx = new ApplicationDbContext())
             {
-                Customer customer = _db.Customers.Find(transaction.CustomerId);
-                if (customer == null)
-                    return HttpNotFound("Customer not found");
-
-                Product product = _db.Products.Find(transaction.ProductId);
-                if (product == null)
-                    return HttpNotFound("Product not found");
-
-                if (transaction.Quantity > product.InventoryCount)
-                    return HttpNotFound("There is not enough inventory for this transaction");
-
-                _db.Transactions.Add(transaction);
-                product.InventoryCount -= transaction.Quantity;
-                _db.SaveChanges();
-                TempData["SaveResult"] = "Your transaction was created";
-                return RedirectToAction("Index");
+                ctx.Transactions.Add(entity);
+                return ctx.SaveChanges() == 1;
             }
-
-            return View(transaction);
         }
 
-        // GET: Edit
-        // Transaction/Edit/{id}
-        public ActionResult Edit(int? id)
+        public bool UpdateTransaction(TransactionEdit model)
         {
-            if (id == null)
+            using (var ctx = new ApplicationDbContext())
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Transaction transaction = _db.Transactions.Find(id);
-            if (transaction == null)
-            {
-                return HttpNotFound();
-            }
+                var entity =
+                    ctx
+                        .Transactions
+                        .Single(e => e.TransactionId == model.TransactionId);
+                // && e.OwnerId == _userId);
 
-            return View(transaction);
-        }
-        
-        // POST: Edit
-        // Transaction/Edit/{id}
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Transaction transaction)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Entry(transaction).State = EntityState.Modified;
-                TempData["SaveResult"] = "Your transaction was updated";
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                entity.CustomerId = model.CustomerId;
+                entity.SupplierId = model.SupplierId;
+                entity.ProductId = model.ProductId;
+                entity.DatePlaced = model.DatePlaced;
+                entity.Quantity = model.Quantity;
+                entity.TotalCost = model.TotalCost;
+                entity.Notes = model.Notes;
 
-            return View(transaction);
-        }
-        // GET: Delete
-        // Transaction/Delete/{id}
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                return ctx.SaveChanges() == 1;
             }
-            Transaction transaction = _db.Transactions.Find(id);
-            if (transaction == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(transaction);
         }
 
-        // POST: Delete
-        // Transaction/Delete/{id}
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public bool DeleteTransaction(int transactionId)
         {
-            Transaction transaction = _db.Transactions.Find(id);
-            Product product = _db.Products.Find(transaction.ProductId);
-            product.InventoryCount += transaction.Quantity;
-            _db.Transactions.Remove(transaction);
-            TempData["SaveResult"] = "Your transaction was deleted";
-
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        
-        // GET: Details
-        // Transaction/Details/{id}
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            using (var ctx = new ApplicationDbContext())
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Transaction transaction = _db.Transactions.Find(id);
+                var entity =
+                    ctx
+                        .Transactions
+                        .Single(e => e.TransactionId == transactionId);
+                // && e.OwnerId == _userId);
 
-            if (transaction == null)
-            {
-                return HttpNotFound();
-            }
+                ctx.Transactions.Remove(entity);
 
-            return View(transaction);
+                return ctx.SaveChanges() == 1;
+            }
         }
 
     }
+
 }

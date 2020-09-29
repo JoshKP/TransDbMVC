@@ -1,4 +1,10 @@
-﻿@model IEnumerable<TransactionManagement.MVC.Models.Supplier>
+﻿@model IEnumerable<TransactionManagement.MVC.Models.SupplierModels.SupplierListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,6 +24,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.SupplierId)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Company)
         </th>
         <th>
@@ -25,6 +34,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserSince)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountAge)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Phone)
@@ -45,6 +57,9 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.SupplierId)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Company)
             </td>
             <td>
@@ -52,6 +67,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserSince)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountAge)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Phone)
@@ -66,7 +84,7 @@
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.SupplierId }) |
+                @Html.ActionLink("Edit", "Edit", new { id=item.SupplierId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.SupplierId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.SupplierId })
             </td>

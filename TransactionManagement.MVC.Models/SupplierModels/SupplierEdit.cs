@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransactionManagement.MVC.Models.CustomerModels
-{
+namespace TransactionManagement.MVC.Models.SupplierModels
+{ 
     public class SupplierEdit
     {
+        public int SupplierId { get; set; }
+
         public string Company { get; set; }
 
         [Display(Name = "Name of Sales Rep/Contact")]

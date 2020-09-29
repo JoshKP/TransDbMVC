@@ -95,6 +95,7 @@ namespace TransactionManagement.MVC.Controllers
             return View(model);
         }
 
+        [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
             var svc = CreateCustomerService();

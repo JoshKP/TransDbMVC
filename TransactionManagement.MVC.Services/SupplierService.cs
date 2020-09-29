@@ -6,122 +6,131 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TransactionManagement.MVC.Data;
+using TransactionManagement.MVC.Models.SupplierModels;
 
 namespace TransactionManagement.MVC.Controllers
 {
-    public class SupplierController : Controller
+    public class SupplierService
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
 
-        // GET: Supplier
-        public ActionResult Index()
+        //public class SupplierService
+        //{
+        //    private readonly Guid _userId;
+
+        //    public SupplierService(Guid userId)
+        //    {
+        //        _userId = userId;
+        //    }
+        //}
+
+        public IEnumerable<SupplierListItem> GetSuppliers()
         {
-            return View(_db.Suppliers.ToList());
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Suppliers
+                        // .Where(e => e.OwnerId == _userId)
+                        .Select(
+                            e =>
+                                new SupplierListItem
+                                {
+                                    SupplierId = e.SupplierId,
+                                    Company = e.Company,
+                                    Category = e.Category,
+                                    Phone = e.Phone,
+                                    Notes = e.Notes
+                                }
+                        );
+
+                return query.ToArray();
+            }
         }
 
-        // GET: Supplier
-        public ActionResult Create()
+        public SupplierDetail GetSupplierById(int id)
         {
-            return View();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Suppliers
+                        .Single(e => e.SupplierId == id);
+                // && e.OwnerId == _userId);
+                return
+                    new SupplierDetail
+                    {
+                        SupplierId = entity.SupplierId,
+                        Company = entity.Company,
+                        SalesRep = entity.SalesRep,
+                        UserSince = entity.UserSince,
+                        Phone = entity.Phone,
+                        Address = entity.Address,
+                        Category = entity.Category,
+                        Notes = entity.Notes
+                    };
+            }
         }
 
-        // POST: Supplier
-        [HttpPost]
-        public ActionResult Create(Supplier supplier)
+        public bool CreateSupplier(SupplierCreate model)
         {
-            if (ModelState.IsValid)
-            {
-                _db.Suppliers.Add(supplier);
-                TempData["SaveResult"] = "Your supplier was created";
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            var entity =
+                new Supplier()
+                {
+                    Company = model.Company,
+                    SalesRep = model.SalesRep,
+                    UserSince = model.UserSince,
+                    Phone = model.Phone,
+                    Address = model.Address,
+                    Category = model.Category,
+                    Notes = model.Notes
+                };
 
-            return View(supplier);
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Suppliers.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
         }
 
-        // GET
-        // Supplier/Delete/{id}
-        public ActionResult Delete(int? id)
+        public bool UpdateSupplier(SupplierEdit model)
         {
-            if (id == null)
+            using (var ctx = new ApplicationDbContext())
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Supplier supplier = _db.Suppliers.Find(id);
-            if (supplier == null)
-            {
-                return HttpNotFound();
-            }
+                var entity =
+                    ctx
+                        .Suppliers
+                        .Single(e => e.SupplierId == model.SupplierId);
+                // && e.OwnerId == _userId);
 
-            return View(supplier);
+                entity.Company = model.Company;
+                entity.SalesRep = model.SalesRep;
+                entity.UserSince = model.UserSince;
+                entity.Phone = model.Phone;
+                entity.Address = model.Address;
+                entity.Category = model.Category;
+                entity.Notes = model.Notes;
+
+                return ctx.SaveChanges() == 1;
+            }
         }
 
-        // POST: Delete
-        // Supplier/Delete/{id}
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public bool DeleteSupplier(int supplierId)
         {
-            Supplier supplier = _db.Suppliers.Find(id);
-            _db.Suppliers.Remove(supplier);
-            TempData["SaveResult"] = "Your supplier was deleted";
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Suppliers
+                        .Single(e => e.SupplierId == supplierId);
+                        // && e.OwnerId == _userId);
+
+                ctx.Suppliers.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
         }
 
-        // GET: Edit
-        // Supplier/Edit/{id}
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Supplier supplier = _db.Suppliers.Find(id);
-            if (supplier == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(supplier);
-        }
-
-        // POST: Edit
-        // Supplier/Edit/{id}
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Supplier supplier)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Entry(supplier).State = EntityState.Modified;
-                TempData["SaveResult"] = "Your supplier was updated";
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(supplier);
-        }
-
-        // GET: Details
-        // Supplier/Details/{id}
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Supplier supplier = _db.Suppliers.Find(id);
-
-            if (supplier == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(supplier);
-        }
     }
 }
+

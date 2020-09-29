@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransactionManagement.MVC.Models.CustomerModels
-{
+namespace TransactionManagement.MVC.Models.SupplierModels
+{ 
     public class SupplierDetail
     {
         public int SupplierId { get; set; }

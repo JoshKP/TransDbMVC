@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransactionManagement.MVC.Models.CustomerModels
+namespace TransactionManagement.MVC.Models.TransactionModels
 {
     public class TransactionListItem
     {
-        [Required]
+        public int TransactionId { get; set; }
+
         public int CustomerId { get; set; }
 
-        [Required]
+        public int SupplierId { get; set; }
+
         public int ProductId { get; set; }
 
         public int TargetedPromoId { get; set; }
