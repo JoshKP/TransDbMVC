@@ -10,6 +10,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success fade in" role="alert">
@@ -74,42 +75,45 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
-            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                </td>
+            }
         </tr>
     }
 
 </table>
 
-@section scripts {
-    <script language="javascript" type="text/javascript">
-        $(document).ready(function () {
-            $("i[data-toggle='star']")
-                .css({ "cursor": "pointer" })
-                .click(function (e) {
-                    var target = $(e.target);
-                    var noteId = target.attr("data-id");
-                    var starSet = target.hasClass("glyphicon-star");
+@*@section scripts {
+        <script language="javascript" type="text/javascript">
+            $(document).ready(function () {
+                $("i[data-toggle='star']")
+                    .css({ "cursor": "pointer" })
+                    .click(function (e) {
+                        var target = $(e.target);
+                        var noteId = target.attr("data-id");
+                        var starSet = target.hasClass("glyphicon-star");
 
-                    $.ajax({
-                        method: starSet ? "DELETE" : "PUT",
-                        url: "/api/note/" + noteId + "/star",
-                        data: null
-                    })
-                        .done(function (r) {
-                            target.removeClass();
-                            target.addClass("glyphicon " + (starSet ? "glyphicon-star-empty" : "glyphicon-star"));
+                        $.ajax({
+                            method: starSet ? "DELETE" : "PUT",
+                            url: "/api/note/" + noteId + "/star",
+                            data: null
                         })
-                        .fail(function (r) {
-                            alert("Failed to change star status");
-                        });
-                });
-        });
-    </script>
-}
+                            .done(function (r) {
+                                target.removeClass();
+                                target.addClass("glyphicon " + (starSet ? "glyphicon-star-empty" : "glyphicon-star"));
+                            })
+                            .fail(function (r) {
+                                alert("Failed to change star status");
+                            });
+                    });
+            });
+        </script>
+    }*@
 <div id="smart-button-container">
     <div style="text-align: center;">
         <div style="margin-bottom: 1.25rem;">

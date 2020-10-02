@@ -9,7 +9,7 @@ using TransactionManagement.MVC.Services;
 
 namespace TransactionManagement.MVC.Controllers
 {
-    [Authorize]
+    
     public class ProductController : Controller
     {
         
@@ -116,6 +116,7 @@ namespace TransactionManagement.MVC.Controllers
         // GET: Delete
         // Product/Delete/{id}
         [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             var svc = CreateProductService();

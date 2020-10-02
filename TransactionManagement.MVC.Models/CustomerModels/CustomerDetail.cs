@@ -24,8 +24,14 @@ namespace TransactionManagement.MVC.Models.CustomerModels
         public string LastName { get; set; }
 
         [Display(Name = "Full Name")]
-        public string FullName { get; }
-                
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+
         [Display(Name = "User Since")]
         public DateTimeOffset UserSince { get; set; }
 
