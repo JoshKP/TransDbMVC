@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TransactionManagement.MVC.Data;
 using TransactionManagement.MVC.Models.SupplierModels;
 
 namespace TransactionManagement.MVC.Controllers
@@ -23,6 +24,30 @@ namespace TransactionManagement.MVC.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        public SupplierDetail GetSupplierById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Suppliers
+                        .Single(e => e.SupplierId == id);
+                // && e.OwnerId == _userId);
+                return
+                    new SupplierDetail
+                    {
+                        SupplierId = entity.SupplierId,
+                        Company = entity.Company,
+                        SalesRep = entity.SalesRep,
+                        UserSince = entity.UserSince,
+                        Phone = entity.Phone,
+                        Address = entity.Address,
+                        Category = entity.Category,
+                        Notes = entity.Notes
+                    };
+            }
         }
 
         [HttpPost]
@@ -51,6 +76,7 @@ namespace TransactionManagement.MVC.Controllers
             var model =
                 new SupplierEdit
                 {
+                    SupplierId = detail.SupplierId,
                     Company = detail.Company,
                     SalesRep = detail.SalesRep,
                     UserSince = detail.UserSince,

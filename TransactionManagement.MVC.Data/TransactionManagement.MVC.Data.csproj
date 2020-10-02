@@ -84,6 +84,10 @@
     <Compile Include="Migrations\202009291453529_build create for trans and supp.Designer.cs">
       <DependentUpon>202009291453529_build create for trans and supp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009301317274_added foreign keys.cs" />
+    <Compile Include="Migrations\202009301317274_added foreign keys.Designer.cs">
+      <DependentUpon>202009301317274_added foreign keys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009291453529_build create for trans and supp.resx">
       <DependentUpon>202009291453529_build create for trans and supp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009301317274_added foreign keys.resx">
+      <DependentUpon>202009301317274_added foreign keys.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

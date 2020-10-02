@@ -120,7 +120,7 @@ namespace TransactionManagement.MVC.Controllers
 
             service.DeleteCustomer(id);
 
-            TempData["SaveResult"] = "Your note was deleted";
+            TempData["SaveResult"] = "Your customer was deleted";
 
             return RedirectToAction("Index");
         }

@@ -33,8 +33,9 @@ namespace TransactionManagement.MVC.Services
                             e => new ProductListItem
                             {
                                 ProductId = e.ProductId,
+                                SupplierId = e.SupplierId,
                                 Name = e.Name,
-                                IsStarred = e.IsStarred,
+                                //IsStarred = e.IsStarred,
                                 Category = e.Category,
                                 Price = e.Price,
                                 InventoryCount = e.InventoryCount

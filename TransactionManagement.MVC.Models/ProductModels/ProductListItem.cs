@@ -20,9 +20,9 @@ namespace TransactionManagement.MVC.Models.ProductModels
         [Display(Name = "Product Category")]
         public string Category { get; set; }
 
-        [UIHint("Starred")]
-        [Display(Name = "Important")]
-        public bool IsStarred { get; set; }
+        //[UIHint("Starred")]
+        //[Display(Name = "Important")]
+        //public bool IsStarred { get; set; }
 
         public double Price { get; set; }
 

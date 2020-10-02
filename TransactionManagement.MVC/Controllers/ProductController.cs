@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,6 +20,10 @@ namespace TransactionManagement.MVC.Controllers
             var model = service.GetProducts();
 
             return View(model);
+        }
+        public ActionResult Create()
+        {
+            return View();
         }
 
         public ProductDetail GetProductById(int id)
@@ -45,12 +47,6 @@ namespace TransactionManagement.MVC.Controllers
                         Notes = entity.Notes
                     };
             }
-        }
-
-        // GET: Product
-        public ActionResult Create()
-        {
-            return View();
         }
 
         // POST: Product
@@ -160,26 +156,4 @@ namespace TransactionManagement.MVC.Controllers
         }
 
     }
-                //[HttpPut]
-        //[Route("{id}/Star")]
-        //public bool ToggleStar(int id)
-        //{
-        //    var service = CreateProductService();
-
-        //    var detail = service.GetProductById(id);
-
-        //    var updatedProduct =
-        //        new ProductEdit
-        //        {
-        //            ProductId = detail.ProductId,
-        //            Name = detail.Name,
-        //            Price = detail.Price,
-        //            IsStarred = !detail.IsStarred
-        //        };
-
-        //    return service.UpdateProduct(updatedProduct);
-        //}
-
-
-    
 }
