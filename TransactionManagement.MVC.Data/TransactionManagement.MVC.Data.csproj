@@ -68,27 +68,6 @@
   <ItemGroup>
     <Compile Include="Customer.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202009282106341_InitialCreate.cs" />
-    <Compile Include="Migrations\202009282106341_InitialCreate.Designer.cs">
-      <DependentUpon>202009282106341_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009282228578_product crud + starred.cs" />
-    <Compile Include="Migrations\202009282228578_product crud + starred.Designer.cs">
-      <DependentUpon>202009282228578_product crud + starred.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009282312524_spelling fix.cs" />
-    <Compile Include="Migrations\202009282312524_spelling fix.Designer.cs">
-      <DependentUpon>202009282312524_spelling fix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009291453529_build create for trans and supp.cs" />
-    <Compile Include="Migrations\202009291453529_build create for trans and supp.Designer.cs">
-      <DependentUpon>202009291453529_build create for trans and supp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009301317274_added foreign keys.cs" />
-    <Compile Include="Migrations\202009301317274_added foreign keys.Designer.cs">
-      <DependentUpon>202009301317274_added foreign keys.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Supplier.cs" />
@@ -97,23 +76,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009282106341_InitialCreate.resx">
-      <DependentUpon>202009282106341_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009282228578_product crud + starred.resx">
-      <DependentUpon>202009282228578_product crud + starred.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009282312524_spelling fix.resx">
-      <DependentUpon>202009282312524_spelling fix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009291453529_build create for trans and supp.resx">
-      <DependentUpon>202009291453529_build create for trans and supp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009301317274_added foreign keys.resx">
-      <DependentUpon>202009301317274_added foreign keys.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

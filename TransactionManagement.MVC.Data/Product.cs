@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,8 +12,10 @@ namespace TransactionManagement.MVC.Data
     {
         [Key]
         public int ProductId { get; set; }
-        [Required]
-        public string SupplierId { get; set; }
+
+        //[ForeignKey(nameof(Supplier))]
+        //public int SupplierId { get; set; }
+        //public virtual Supplier Supplier { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -27,5 +30,8 @@ namespace TransactionManagement.MVC.Data
         [Display(Name="# In Stock")]
         public int InventoryCount { get; set; }
         public string Notes { get; set; }
+        public byte[] Image { get; set; }
+
+        
     }
 }

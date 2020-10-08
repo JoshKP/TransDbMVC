@@ -12,10 +12,8 @@ namespace TransactionManagement.MVC.Data
         [Required]
         public int TransactionId { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(Supplier))]
         public int SupplierId { get; set; }
-        public virtual Supplier Supplier { get; set; }
+
 
         [Required]
         [ForeignKey(nameof(Customer))]
@@ -43,6 +41,6 @@ namespace TransactionManagement.MVC.Data
 
         public string Notes { get; set; }
 
-        public enum PaymentMethod { Cash, Check, CreditCard, PayPal, BitCoin}
+        public enum PaymentMethod { Cash, Check, CreditCard, PayPal, BitCoin }
     }
 }

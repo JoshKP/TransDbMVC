@@ -11,7 +11,7 @@ namespace TransactionManagement.MVC.Models.ProductModels
     {
         [Required]
         [Display(Name = "Supplier ID")]
-        public string SupplierId { get; set; }
+        public int SupplierId { get; set; }
 
 
         [Required]
@@ -30,5 +30,7 @@ namespace TransactionManagement.MVC.Models.ProductModels
         public int InventoryCount { get; set; }
 
         public string Notes { get; set; }
+
+        public byte[] Image { get; set; }
     }
 }

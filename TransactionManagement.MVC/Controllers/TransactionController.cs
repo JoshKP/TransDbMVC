@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TransactionManagement.MVC.Data;
 using TransactionManagement.MVC.Models.TransactionModels;
+using TransactionManagement.MVC.Services;
 
 namespace TransactionManagement.MVC.Controllers
 {
     [Authorize]
     public class TransactionController : Controller
     {
+        private ApplicationDbContext _db = new ApplicationDbContext();
+
         // GET: Transaction
         public ActionResult Index()
         {
@@ -22,6 +26,21 @@ namespace TransactionManagement.MVC.Controllers
 
         public ActionResult Create()
         {
+            var customerService = new CustomerService();
+            var customers = customerService.GetCustomers();
+            var grape = new SelectList(customers, "CustomerId", "FullName");
+            ViewBag.Customers = grape;
+
+            var supplierService = new SupplierService();
+            var suppliers = supplierService.GetSuppliers();
+            var banana = new SelectList(suppliers, "SupplierId", "Company");
+            ViewBag.Suppliers = banana;
+
+            var productService = new ProductService();
+            var products = productService.GetProducts();
+            var orange = new SelectList(products, "ProductId", "Name");
+            ViewBag.Products = orange;
+
             return View();
         }
 

@@ -7,8 +7,7 @@
 <!-- Carousel Start -->
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-
+        <div class="col-md-12">
             <div id="carousel" class="carousel slide" data-interval="4000" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carousel" data-slide-to="0" class="active"></li>
@@ -45,29 +44,20 @@
         </div>
     </div>
 </div>
-
-<div class="jumbotron">
-    <h1>FREE 30-DAY TRIAL</h1>
-    <p class="lead">Suppliers sign-up today for a risk free 30-day trial!</p>
-    <p>@Html.ActionLink("Learn More About Us", "About")</p>
-</div>
+<!-- Carousel End -->
 
 <div class="row">
     <div class="col-md-4">
         <h2>Products</h2>
-        <p>
-            Browse our products and utilize powerful methods to customize your search and even see trends for products and suppliers.
-        </p>
         <p>@Html.ActionLink("Products", "Index", "Product", null, new { @class = "btn btn-primary btn-large" })</p>
     </div>
     <div class="col-md-4">
         <h2>Customers</h2>
-        <p>TransDb is a powerful tool for buyers and suppliers alike. </p>
         <p>@Html.ActionLink("Customers", "Index", "Customer", null, new { @class = "btn btn-primary btn-large" })</p>
     </div>
     <div class="col-md-4">
         <h2>Suppliers</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p>@Html.ActionLink("Suppliers", "Index", "Supplier", null, new { @class = "btn btn-primary btn-large" })</p>
+
     </div>
 </div>

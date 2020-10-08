@@ -5,10 +5,12 @@
 }
 
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 
 
 @if (TempData.ContainsKey("SaveResult"))
@@ -22,71 +24,61 @@
     </div>
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SupplierId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.IsStarred)
-            </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InventoryCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        <th></th>
-    </tr>
-
+<div class="row">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SupplierId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InventoryCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
-                </td>
-            }
-        </tr>
-    }
+            <div class="col-md-3 product-container">
+        <a href="@Url.Action("Details", new {id = item.ProductId})">
+                <div class="product-card">
+                    <div class="product-title">
+                        @Html.DisplayFor(modelItem => item.Name)
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.DisplayFor(modelItem => item.ProductId)
+                            @Html.DisplayFor(modelItem => item.SupplierId)
+                        }
+                    </div>
+                    <div class="product-body">
+                        <div class="product-info">
+                            @Html.DisplayFor(modelItem => item.Price)
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @Html.DisplayFor(modelItem => item.Category)
+                                @Html.DisplayFor(modelItem => item.InventoryCount)
+                            }
+                            @Html.DisplayFor(modelItem => item.Notes)
+                        </div>
+                        <div class="product-image">
+                            <img src="/Product/RetrieveImage/@item.ProductId" alt="" height="135" width="240" />
+                        </div>
+                        <div class="product-options">
+                            
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId })
 
-</table>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                            }
+                        </div>
+                    </div>
+                </div>
+        </a>
+            </div>
+    }
+</div>
+
+@*<div class="card-columns">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-img" stye="background-image: url('');"></div>
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                </div>
+            </div>
+        }
+    </div>*@
+
 
 @*@section scripts {
         <script language="javascript" type="text/javascript">

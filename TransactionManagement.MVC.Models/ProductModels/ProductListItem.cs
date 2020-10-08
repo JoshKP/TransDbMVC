@@ -12,7 +12,7 @@ namespace TransactionManagement.MVC.Models.ProductModels
         public int ProductId { get; set; }
 
         [Display(Name = "Supplier ID")]
-        public string SupplierId { get; set; }
+        public int SupplierId { get; set; }
 
         [Display(Name = "Name of Product")]
         public string Name { get; set; }
@@ -31,5 +31,6 @@ namespace TransactionManagement.MVC.Models.ProductModels
 
         public string Notes { get; set; }
 
+        public byte[] Image { get; set; }
     }
 }

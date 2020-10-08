@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,7 +24,27 @@ namespace TransactionManagement.MVC.Controllers
         }
         public ActionResult Create()
         {
+            var supplierService = new SupplierService();
+            var suppliers = supplierService.GetSuppliers();
+            var banana = new SelectList(suppliers, "SupplierId", "Company");
+            ViewBag.Suppliers = banana;
+
             return View();
+        }
+
+        public ActionResult RetrieveImage(int id)
+        {
+            //var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ProductService();
+            byte[] cover = service.GetImageFromDB(id);
+            if (cover != null)
+            {
+                return File(cover, "image/jpg");
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public ProductDetail GetProductById(int id)
@@ -39,12 +60,13 @@ namespace TransactionManagement.MVC.Controllers
                     new ProductDetail
                     {
                         ProductId = entity.ProductId,
-                        SupplierId = entity.SupplierId,
+                        //SupplierId = entity.SupplierId,
                         Name = entity.Name,
                         Category = entity.Category,
                         Price = entity.Price,
                         InventoryCount = entity.InventoryCount,
-                        Notes = entity.Notes
+                        Notes = entity.Notes,
+                        Image = entity.Image
                     };
             }
         }
@@ -54,11 +76,13 @@ namespace TransactionManagement.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProductCreate model)
         {
+            HttpPostedFileBase file = Request.Files["ImageData"];
+
             if (!ModelState.IsValid) return View(model);
 
             var service = CreateProductService();
 
-            if (service.CreateProduct(model))
+            if (service.CreateProduct(file, model))
             {
                 TempData["SaveResult"] = "Your product was created.";
                 return RedirectToAction("Index");
@@ -84,7 +108,8 @@ namespace TransactionManagement.MVC.Controllers
                     Category = detail.Category,
                     Price = detail.Price,
                     InventoryCount = detail.InventoryCount,
-                    Notes = detail.Notes
+                    Notes = detail.Notes,
+                    Image = detail.Image
                 };
             return View(model);
         }
@@ -93,6 +118,8 @@ namespace TransactionManagement.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ProductEdit model)
         {
+            HttpPostedFileBase file = Request.Files["ImageData"];
+
             if (!ModelState.IsValid) return View(model);
 
             if (model.ProductId != id)
@@ -103,7 +130,7 @@ namespace TransactionManagement.MVC.Controllers
 
             var service = CreateProductService();
 
-            if (service.UpdateProduct(model))
+            if (service.UpdateProduct(file, model))
             {
                 TempData["SaveResult"] = "Your product was updated.";
                 return RedirectToAction("Index");
@@ -116,7 +143,6 @@ namespace TransactionManagement.MVC.Controllers
         // GET: Delete
         // Product/Delete/{id}
         [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             var svc = CreateProductService();
@@ -155,6 +181,9 @@ namespace TransactionManagement.MVC.Controllers
             var service = new ProductService();
             return service;
         }
+
+
+        
 
     }
 }
