@@ -24,14 +24,17 @@
     </div>
 }
 
-<div class="row">
+<div class="row corkboard">
     @foreach (var item in Model)
     {
-            <div class="col-md-3 product-container">
-        <a href="@Url.Action("Details", new {id = item.ProductId})">
+        <div class="col-md-3 product-container">
+            <a href="@Url.Action("Details", new {id = item.ProductId})">
                 <div class="product-card">
                     <div class="product-title">
-                        @Html.DisplayFor(modelItem => item.Name)
+                        <div class="col-md-10">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </div>
+                        @Html.DisplayFor(modelItem => item.Price)
                         @if (User.Identity.IsAuthenticated)
                         {
                             @Html.DisplayFor(modelItem => item.ProductId)
@@ -39,20 +42,20 @@
                         }
                     </div>
                     <div class="product-body">
+                        <div class="product-image">
+                            <img src="/Product/RetrieveImage/@item.ProductId" alt="" height="135" width="240" />
+                        </div>
                         <div class="product-info">
-                            @Html.DisplayFor(modelItem => item.Price)
+                            @Html.DisplayFor(modelItem => item.Category)
+                            @Html.DisplayFor(modelItem => item.SupplierId)
                             @if (User.Identity.IsAuthenticated)
                             {
-                                @Html.DisplayFor(modelItem => item.Category)
                                 @Html.DisplayFor(modelItem => item.InventoryCount)
                             }
                             @Html.DisplayFor(modelItem => item.Notes)
                         </div>
-                        <div class="product-image">
-                            <img src="/Product/RetrieveImage/@item.ProductId" alt="" height="135" width="240" />
-                        </div>
                         <div class="product-options">
-                            
+
                             @if (User.Identity.IsAuthenticated)
                             {
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ProductId })
@@ -62,8 +65,8 @@
                         </div>
                     </div>
                 </div>
-        </a>
-            </div>
+            </a>
+        </div>
     }
 </div>
 

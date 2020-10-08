@@ -23,33 +23,50 @@ body {
     padding-right: 15px;
 }
 
+.corkboard {
+    background-image: url('Assets/CalmGreen.jpg');
+    padding: 3rem;
+}
+
 .product-container {
-    padding: 1em;
+    padding: 1rem;
+}
+
+.product-container a {
+    color: white;
+}
+
+.product-container a:hover {
+    color: white;
+    text-decoration: none;
 }
 
 .product-card {
-    border: solid 1px black;
+    border: hidden 1px black;
     background-color: darksalmon;
+    background-image: url('Assets/LightWoodBG.jpg');
+    background-size:cover;
     border-radius: 20px;
-    z-index: 2;
+    overflow: hidden;
 }
 
 .product-title {
     overflow:hidden;
     text-align: center;
-    background-color: saddlebrown;
+    background-color: antiquewhite;
     color: black;
     padding: .25em;
 }
 
 .product-body {
-    padding: .33em;
+    padding: 1.5em .6em;
     min-height: 250px;
 }
 
 .product-info {
     text-align: center;
     padding: .25em;
+    text-align: left;
 }
 
 .product-image {
