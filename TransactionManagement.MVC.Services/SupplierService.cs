@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -74,6 +75,8 @@ namespace TransactionManagement.MVC.Controllers
 
         public bool CreateSupplier(SupplierCreate model)
         {
+            
+
             var entity =
                 new Supplier()
                 {
@@ -90,6 +93,24 @@ namespace TransactionManagement.MVC.Controllers
             {
                 ctx.Suppliers.Add(entity);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public byte[] ConvertToBytes(HttpPostedFileBase image)
+        {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(image.InputStream);
+            imageBytes = reader.ReadBytes((int)image.ContentLength);
+            return imageBytes;
+        }
+
+        public byte[] GetImageFromDB(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var q = from temp in ctx.Products where temp.ProductId == id select temp.Image;
+                byte[] cover = q.First();
+                return cover;
             }
         }
 

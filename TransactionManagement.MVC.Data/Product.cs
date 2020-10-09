@@ -13,9 +13,10 @@ namespace TransactionManagement.MVC.Data
         [Key]
         public int ProductId { get; set; }
 
-        //[ForeignKey(nameof(Supplier))]
-        //public int SupplierId { get; set; }
-        //public virtual Supplier Supplier { get; set; }
+        [ForeignKey(nameof(Supplier))]
+        public int SupplierId { get; set; }
+        public virtual Supplier Supplier { get; set; }
+
         [Required]
         public string Name { get; set; }
         [Required]

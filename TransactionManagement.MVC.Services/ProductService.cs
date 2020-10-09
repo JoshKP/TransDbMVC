@@ -81,7 +81,7 @@ namespace TransactionManagement.MVC.Services
                 new Product
                 {
                     // OwnerId = _userId,
-                    //SupplierId = model.SupplierId,
+                    SupplierId = model.SupplierId,
                     Name = model.Name,
                     Category = model.Category,
                     Price = model.Price,

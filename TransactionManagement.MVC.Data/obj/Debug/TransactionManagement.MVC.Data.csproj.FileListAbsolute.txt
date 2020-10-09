@@ -22,3 +22,5 @@ C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.D
 C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\bin\Debug\System.Net.Http.Formatting.xml
 C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\bin\Debug\System.Web.Http.xml
 C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\bin\Debug\System.Web.Http.WebHost.xml
+C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Debug\TransactionManagement.MVC.Data.Migrations.fkonproductofsupp.resources
+C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Debug\TransactionManagement.MVC.Data.csproj.GenerateResource.cache

@@ -1,11 +1,12 @@
-﻿ Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+﻿ /*Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column */
 
 .dl-horizontal dt {
     white-space: normal;
 }
 
- Set width on the form input elements since they're 100% wide by default 
+/*Set width on the form input elements since they're 100% wide by default*/
+ 
 input,
 select,
 textarea {
@@ -25,11 +26,13 @@ body {
 
 .corkboard {
     background-image: url('Assets/CalmGreen.jpg');
-    padding: 3rem;
+    padding: 1.5em 3rem;
+    border: 7px solid dimgrey;
+    border-radius: 5px;
 }
 
 .product-container {
-    padding: 1rem;
+    padding: 1.2em;
 }
 
 .product-container a {
@@ -60,17 +63,19 @@ body {
 
 .product-body {
     padding: 1.5em .6em;
-    min-height: 250px;
+    height: 250px;
+    
 }
 
 .product-info {
     text-align: center;
     padding: .25em;
     text-align: left;
+    color: black;
 }
 
 .product-image {
-    align-content: center;
+    
 }
 
 .product-options {
@@ -78,6 +83,9 @@ body {
     padding: .25em;
 }
 
+/*.carousel {
+    max-width: 200px;
+}*/
 
 
 

@@ -10,10 +10,10 @@ using TransactionManagement.MVC.Services;
 
 namespace TransactionManagement.MVC.Controllers
 {
-    
+
     public class ProductController : Controller
     {
-        
+
         public ActionResult Index()
         {
             // var userId = Guid.Parse(User.Identity.GetUserId());
@@ -55,7 +55,7 @@ namespace TransactionManagement.MVC.Controllers
                     ctx
                         .Products
                         .Single(e => e.ProductId == id);
-                        // && e.OwnerId == _userId);
+                // && e.OwnerId == _userId);
                 return
                     new ProductDetail
                     {
@@ -181,9 +181,6 @@ namespace TransactionManagement.MVC.Controllers
             var service = new ProductService();
             return service;
         }
-
-
-        
 
     }
 }
