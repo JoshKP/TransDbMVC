@@ -99,6 +99,18 @@
     <Compile Include="Migrations\202010131915058_added datetime type to data.designer.cs">
       <DependentUpon>202010131915058_added datetime type to data.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010131954462_added back total cost.cs" />
+    <Compile Include="Migrations\202010131954462_added back total cost.designer.cs">
+      <DependentUpon>202010131954462_added back total cost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010132007319_tweaks1.cs" />
+    <Compile Include="Migrations\202010132007319_tweaks1.designer.cs">
+      <DependentUpon>202010132007319_tweaks1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010132034256_tweaks n more.cs" />
+    <Compile Include="Migrations\202010132034256_tweaks n more.designer.cs">
+      <DependentUpon>202010132034256_tweaks n more.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +147,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010131915058_added datetime type to data.resx">
       <DependentUpon>202010131915058_added datetime type to data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131954462_added back total cost.resx">
+      <DependentUpon>202010131954462_added back total cost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010132007319_tweaks1.resx">
+      <DependentUpon>202010132007319_tweaks1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010132034256_tweaks n more.resx">
+      <DependentUpon>202010132034256_tweaks n more.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

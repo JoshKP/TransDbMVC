@@ -38,8 +38,14 @@ namespace TransactionManagement.MVC.Data
         [Required]
         public int Quantity { get; set; }
 
-        [Required]
-        public double TotalCost { get; set; }
+        public double TotalCost
+        {
+            get
+            {
+                double total = Product.Price * Quantity;
+                return total;
+            }
+        }
 
         public string Notes { get; set; }
 

@@ -13,7 +13,7 @@ namespace Joshify.Controllers
     [Authorize]
     public class TransactionController : Controller
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
+        //private ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Transaction
         public ActionResult Index()
@@ -76,7 +76,6 @@ namespace Joshify.Controllers
                     ProductId = detail.ProductId,
                     DatePlaced = detail.DatePlaced,
                     Quantity = detail.Quantity,
-                    TotalCost = detail.TotalCost,
                     Notes = detail.Notes
                 };
             return View(model);

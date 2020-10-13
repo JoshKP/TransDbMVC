@@ -27,24 +27,22 @@ namespace TransactionManagement.MVC.Controllers
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query =
-                    ctx
-                        .Transactions
-                        // .Where(e => e.OwnerId == _userId)
-                        .Select(
-                            e =>
-                                new TransactionListItem
-                                {
-                                    TransactionId = e.TransactionId,
-                                    CustomerId = e.CustomerId,
-                                    SupplierId = e.SupplierId,
-                                    ProductId = e.ProductId,
-                                    Quantity = e.Quantity,
-                                    Notes = e.Notes
-                                }
-                        );
-
-                return query.ToArray();
+                var query = _db.Transactions.ToList().Select(e =>
+                {
+                    var item = new TransactionListItem
+                    {
+                        TransactionId = e.TransactionId,
+                        CustomerId = e.CustomerId,
+                        SupplierId = e.SupplierId,
+                        ProductId = e.ProductId,
+                        Quantity = e.Quantity,
+                        TotalCost = e.TotalCost,
+                        Notes = e.Notes
+                    };
+                    item.TotalCost = e.TotalCost;
+                    return item;
+                });
+                return query;
             }
         }
 
@@ -72,6 +70,7 @@ namespace TransactionManagement.MVC.Controllers
             }
         }
 
+        // POST: Create
         public bool CreateTransaction(TransactionCreate model)
         {
             var entity =
@@ -81,6 +80,7 @@ namespace TransactionManagement.MVC.Controllers
                     SupplierId = model.SupplierId,
                     ProductId = model.ProductId,
                     Quantity = model.Quantity,
+
                     Notes = model.Notes
                 };
 

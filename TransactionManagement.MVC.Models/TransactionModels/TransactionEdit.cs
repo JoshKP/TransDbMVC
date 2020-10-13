@@ -26,7 +26,6 @@ namespace TransactionManagement.MVC.Models.TransactionModels
 
         public int Quantity { get; set; }
 
-        public double TotalCost { get; set; }
 
         public string Notes { get; set; }
 
