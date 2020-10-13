@@ -96,8 +96,11 @@ body {
 }
 
 .product-image {
-    
     border-top: solid 2px black;
+}
+
+.product-carousel {
+    padding-left: 1em;
 }
 
 .product-options {
