@@ -37,5 +37,8 @@ namespace TransactionManagement.MVC.Models.SupplierModels
         public string Category { get; set; }
 
         public string Notes { get; set; }
+
+        public byte[] Image { get; set; }
+
     }
 }

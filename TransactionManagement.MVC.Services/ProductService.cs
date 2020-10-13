@@ -34,7 +34,7 @@ namespace TransactionManagement.MVC.Services
                             e => new ProductListItem
                             {
                                 ProductId = e.ProductId,
-                                //SupplierId = e.SupplierId,
+                                SupplierId = e.SupplierId,
                                 Name = e.Name,
                                 //IsStarred = e.IsStarred,
                                 Category = e.Category,
@@ -60,7 +60,8 @@ namespace TransactionManagement.MVC.Services
                     new ProductDetail
                     {
                         ProductId = entity.ProductId,
-                        //SupplierId = entity.SupplierId,
+                        SupplierId = entity.SupplierId,
+                        Company = entity.Supplier.Company,
                         Name = entity.Name,
                         // IsStarred = entity.IsStarred,
                         Category = entity.Category,
@@ -81,7 +82,7 @@ namespace TransactionManagement.MVC.Services
                 new Product
                 {
                     // OwnerId = _userId,
-                    //SupplierId = model.SupplierId,
+                    SupplierId = model.SupplierId,
                     Name = model.Name,
                     Category = model.Category,
                     Price = model.Price,
@@ -128,7 +129,7 @@ namespace TransactionManagement.MVC.Services
                         .Products
                         .SingleOrDefault(e => e.ProductId == model.ProductId);  // && e.OwnerId == _userId);
 
-                //entity.SupplierId = model.SupplierId;
+                entity.SupplierId = model.SupplierId;
                 entity.Name = model.Name;
                 entity.IsStarred = model.IsStarred;
                 entity.Category = model.Category;

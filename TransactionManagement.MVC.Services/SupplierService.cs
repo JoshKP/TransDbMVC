@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -40,7 +41,8 @@ namespace TransactionManagement.MVC.Controllers
                                     Company = e.Company,
                                     Category = e.Category,
                                     Phone = e.Phone,
-                                    Notes = e.Notes
+                                    Notes = e.Notes,
+                                    Image = e.Image
                                 }
                         );
 
@@ -67,13 +69,17 @@ namespace TransactionManagement.MVC.Controllers
                         Phone = entity.Phone,
                         Address = entity.Address,
                         Category = entity.Category,
-                        Notes = entity.Notes
+                        Notes = entity.Notes,
+                        Image = entity.Image
                     };
             }
         }
 
-        public bool CreateSupplier(SupplierCreate model)
+        public bool CreateSupplier(HttpPostedFileBase file, SupplierCreate model)
         {
+
+            model.Image = ConvertToBytes(file);
+
             var entity =
                 new Supplier()
                 {
@@ -93,8 +99,28 @@ namespace TransactionManagement.MVC.Controllers
             }
         }
 
-        public bool UpdateSupplier(SupplierEdit model)
+        public byte[] ConvertToBytes(HttpPostedFileBase image)
         {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(image.InputStream);
+            imageBytes = reader.ReadBytes((int)image.ContentLength);
+            return imageBytes;
+        }
+
+        public byte[] GetImageFromDB(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var q = from temp in ctx.Suppliers where temp.SupplierId == id select temp.Image;
+                byte[] cover = q.First();
+                return cover;
+            }
+        }
+
+        public bool UpdateSupplier(HttpPostedFileBase file, SupplierEdit model)
+        {
+            model.Image = ConvertToBytes(file);
+
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
@@ -110,6 +136,7 @@ namespace TransactionManagement.MVC.Controllers
                 entity.Address = model.Address;
                 entity.Category = model.Category;
                 entity.Notes = model.Notes;
+                entity.Image = model.Image;
 
                 return ctx.SaveChanges() == 1;
             }

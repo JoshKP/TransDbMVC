@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 
@@ -43,5 +44,7 @@ namespace TransactionManagement.MVC.Data
         public string Category { get; set; }
 
         public string Notes { get; set; }
+
+        public byte[] Image { get; set; }
     }
 }

@@ -28,7 +28,9 @@ namespace TransactionManagement.MVC.Data
         public int TargetedPromoId { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public DateTimeOffset DatePlaced { get; set; }
+        
 
         [Required]
         public PaymentMethod TypeOfPayment { get; set; }
