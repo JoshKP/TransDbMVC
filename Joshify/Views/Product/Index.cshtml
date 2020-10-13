@@ -24,7 +24,7 @@
     </div>
 }
 
-<ul class="nav nav-tabs">
+@*<ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#First">First</a></li>
     <li><a data-toggle="tab" href="#Second">Second</a></li>
     <li>@Html.ActionLink("Suppliers", "Index", "Supplier")</li>
@@ -34,7 +34,7 @@
     <div id="First" class="tab-pane fade in active">First</div>
     <div id="Second" class="tab-pane fade">Second</div>
     <div id="Third" class="tab-pane fade">Third</div>
-</div>
+</div>*@
 
 <div class="row corkboard">
     @foreach (var item in Model)
@@ -47,11 +47,11 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </div>
                         @Html.DisplayFor(modelItem => item.Price)
-                        @if (User.Identity.IsAuthenticated)
+                        @*@if (User.Identity.IsAuthenticated)
                         {
                             @Html.DisplayFor(modelItem => item.ProductId)
                             @Html.DisplayFor(modelItem => item.SupplierId)
-                        }
+                        }*@
                     </div>
                     <div class="product-body">
                         <div class="product-image">
@@ -97,20 +97,20 @@
 
                         <div class="product-info">
                             @Html.DisplayFor(modelItem => item.Category)
-                            @if (User.Identity.IsAuthenticated)
+                            @*@if (User.Identity.IsAuthenticated)
                             {
                                 @Html.DisplayFor(modelItem => item.SupplierId)
                                 @Html.DisplayFor(modelItem => item.InventoryCount)
                             }
-                            @Html.DisplayFor(modelItem => item.Notes)
+                            @Html.DisplayFor(modelItem => item.Notes)*@
                         </div>
                         <div class="product-options">
 
 
                             @if (User.Identity.IsAuthenticated)
                             {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId })
 
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId })  
                                 @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
                             }
                         </div>

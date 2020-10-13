@@ -17,6 +17,7 @@ namespace TransactionManagement.MVC.Models.SupplierModels
         public string SalesRep { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "User since")]
         public DateTimeOffset UserSince { get; set; }
 

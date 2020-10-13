@@ -30,6 +30,8 @@ namespace TransactionManagement.MVC.Data
         }
 
         [Required]
+        [Display(Name = "User since")]
+        [DataType(DataType.Date)]
         public DateTimeOffset UserSince { get; set; }
         public double AccountAge
         {

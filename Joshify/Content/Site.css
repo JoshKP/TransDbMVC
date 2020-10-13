@@ -32,10 +32,15 @@ body {
     background-size: cover;
 }
 
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    color: white;
+}
+
+.body-content a {
     color: white;
 }
 
@@ -87,7 +92,7 @@ body {
     text-align: center;
     padding: .25em;
     text-align: left;
-    color: black;
+    
 }
 
 .product-image {

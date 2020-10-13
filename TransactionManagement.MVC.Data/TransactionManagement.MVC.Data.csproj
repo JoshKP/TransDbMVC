@@ -95,6 +95,10 @@
     <Compile Include="Migrations\202010131253493_change phone to string.designer.cs">
       <DependentUpon>202010131253493_change phone to string.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010131915058_added datetime type to data.cs" />
+    <Compile Include="Migrations\202010131915058_added datetime type to data.designer.cs">
+      <DependentUpon>202010131915058_added datetime type to data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010131253493_change phone to string.resx">
       <DependentUpon>202010131253493_change phone to string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131915058_added datetime type to data.resx">
+      <DependentUpon>202010131915058_added datetime type to data.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
