@@ -28,3 +28,4 @@ C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.D
 C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Release\TransactionManagement.MVC.Data.csproj.CopyComplete
 C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Release\TransactionManagement.MVC.Data.dll
 C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Release\TransactionManagement.MVC.Data.pdb
+C:\EFA Work\DotNetProjects\TransactionManagement.MVC\TransactionManagement.MVC.Data\obj\Release\TransactionManagement.MVC.Data.Migrations.changephonetostring.resources
