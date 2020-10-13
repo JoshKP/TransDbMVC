@@ -26,6 +26,21 @@ namespace TransactionManagement.MVC.Controllers
             return View();
         }
 
+        public ActionResult RetrieveImage(int id)
+        {
+            //var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new SupplierService();
+            byte[] cover = service.GetImageFromDB(id);
+            if (cover != null)
+            {
+                return File(cover, "image/jpg");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public SupplierDetail GetSupplierById(int id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -45,7 +60,8 @@ namespace TransactionManagement.MVC.Controllers
                         Phone = entity.Phone,
                         Address = entity.Address,
                         Category = entity.Category,
-                        Notes = entity.Notes
+                        Notes = entity.Notes,
+                        Image = entity.Image
                     };
             }
         }
@@ -54,11 +70,14 @@ namespace TransactionManagement.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(SupplierCreate model)
         {
+            HttpPostedFileBase file = Request.Files["ImageData"];
+
+
             if (!ModelState.IsValid) return View(model);
 
             var service = CreateSupplierService();
 
-            if (service.CreateSupplier(model))
+            if (service.CreateSupplier(file, model))
             {
                 TempData["SaveResult"] = "Your supplier was created.";
                 return RedirectToAction("Index");
@@ -83,7 +102,8 @@ namespace TransactionManagement.MVC.Controllers
                     Phone = detail.Phone,
                     Address = detail.Address,
                     Category = detail.Category,
-                    Notes = detail.Notes
+                    Notes = detail.Notes,
+                    Image = detail.Image
                 };
             return View(model);
         }
@@ -92,6 +112,8 @@ namespace TransactionManagement.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, SupplierEdit model)
         {
+            HttpPostedFileBase file = Request.Files["ImageData"];
+
             if (!ModelState.IsValid) return View(model);
 
             if (model.SupplierId != id)
@@ -102,7 +124,7 @@ namespace TransactionManagement.MVC.Controllers
 
             var service = CreateSupplierService();
 
-            if (service.UpdateSupplier(model))
+            if (service.UpdateSupplier(file, model))
             {
                 TempData["SaveResult"] = "Your supplier was updated.";
                 return RedirectToAction("Index");

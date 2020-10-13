@@ -40,7 +40,6 @@ namespace TransactionManagement.MVC.Controllers
                                     SupplierId = e.SupplierId,
                                     ProductId = e.ProductId,
                                     Quantity = e.Quantity,
-                                    TotalCost = e.TotalCost,
                                     Notes = e.Notes
                                 }
                         );
@@ -81,9 +80,7 @@ namespace TransactionManagement.MVC.Controllers
                     CustomerId = model.CustomerId,
                     SupplierId = model.SupplierId,
                     ProductId = model.ProductId,
-                    DatePlaced = model.DatePlaced,
                     Quantity = model.Quantity,
-                    TotalCost = model.TotalCost,
                     Notes = model.Notes
                 };
 
@@ -107,9 +104,7 @@ namespace TransactionManagement.MVC.Controllers
                 entity.CustomerId = model.CustomerId;
                 entity.SupplierId = model.SupplierId;
                 entity.ProductId = model.ProductId;
-                entity.DatePlaced = model.DatePlaced;
                 entity.Quantity = model.Quantity;
-                entity.TotalCost = model.TotalCost;
                 entity.Notes = model.Notes;
 
                 return ctx.SaveChanges() == 1;

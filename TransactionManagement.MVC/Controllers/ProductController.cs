@@ -47,6 +47,21 @@ namespace TransactionManagement.MVC.Controllers
             }
         }
 
+        public ActionResult RetrieveImageSupplier(int id)
+        {
+            //var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new SupplierService();
+            byte[] cover = service.GetImageFromDB(id);
+            if (cover != null)
+            {
+                return File(cover, "image/jpg");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public ProductDetail GetProductById(int id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -60,7 +75,8 @@ namespace TransactionManagement.MVC.Controllers
                     new ProductDetail
                     {
                         ProductId = entity.ProductId,
-                        //SupplierId = entity.SupplierId,
+                        SupplierId = entity.SupplierId,
+                        Company = entity.Supplier.Company,
                         Name = entity.Name,
                         Category = entity.Category,
                         Price = entity.Price,

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransactionManagement.MVC.Data;
 
 namespace TransactionManagement.MVC.Models.TransactionModels
 {
@@ -19,15 +20,12 @@ namespace TransactionManagement.MVC.Models.TransactionModels
 
         public int TargetedPromoId { get; set; }
 
-        [Required]
         public DateTimeOffset DatePlaced { get; set; }
 
         public PaymentMethod TypeOfPayment { get; set; }
 
-        [Required]
         public int Quantity { get; set; }
 
-        [Required]
         public double TotalCost { get; set; }
 
         public string Notes { get; set; }

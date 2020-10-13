@@ -44,7 +44,7 @@ namespace TransactionManagement.MVC.Data
 
         [Required]
         [Display(Name = "Phone Number")]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         public string Address { get; set; }

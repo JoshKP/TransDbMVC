@@ -25,7 +25,7 @@ namespace TransactionManagement.MVC.Models.CustomerModels
         public DateTimeOffset UserSince { get; set; }
 
         [Display(Name = "Phone Number")]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public string Address { get; set; }
 

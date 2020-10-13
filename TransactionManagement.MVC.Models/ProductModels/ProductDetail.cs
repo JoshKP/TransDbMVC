@@ -15,6 +15,8 @@ namespace TransactionManagement.MVC.Models.ProductModels
         [Display(Name = "Supplier ID")]
         public int SupplierId { get; set; }
 
+        public string Company { get; set; }
+
         [Display(Name = "Name of Product")]
         public string Name { get; set; }
 
